@@ -64,6 +64,21 @@ body {
   font-synthesis: none;
 }
 
+
+/* Outpaced logo SVG */
+.outpaced-logo {
+  height: clamp(12px, 2.8vw, 26px);
+  width: auto;
+  display: block;
+  transition: color var(--transition);
+}
+#intro-brand .outpaced-logo {
+  height: clamp(12px, 2.8vw, 26px);
+}
+#nav-brand .outpaced-logo {
+  height: clamp(12px, 2.8vw, 26px);
+}
+
 /* ── CURSOR ── */
 #cursor {
   position: fixed;
@@ -83,7 +98,7 @@ body {
 /* ── COLLAB BADGE ── */
 #collab-badge {
   position: fixed;
-  top: 20px; right: 28px;
+  top: clamp(16px,2.5vw,28px); right: clamp(16px,2.5vw,28px);
   z-index: 99998;
   display: flex;
   align-items: center;
@@ -145,10 +160,11 @@ section {
 #opening canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
 
 #opening-brand {
-  position: absolute; bottom: 28px; left: 36px;
-  font-size: clamp(9px,.75vw,12px); letter-spacing: .48em; text-transform: uppercase;
-  color: var(--ink); opacity: .75; z-index: 10; pointer-events: none;
+  position: absolute; top: clamp(23px,2.5vw,35px); left: clamp(16px,2.5vw,28px);
+  z-index: 10; pointer-events: none;
+  color: var(--ink); opacity: .85;
   transition: color var(--transition);
+  display: flex; align-items: center;
 }
 #opening-slogan {
   position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
@@ -180,7 +196,7 @@ section {
 }
 
 #phase-label {
-  position: absolute; top: 28px; left: 36px;
+  position: absolute; bottom: clamp(16px,2.5vw,28px); left: clamp(16px,2.5vw,28px);
   font-size: 8px; letter-spacing: .28em; text-transform: uppercase;
   color: var(--ink); opacity: .25; z-index: 10; pointer-events: none;
   transition: color var(--transition);
@@ -211,9 +227,9 @@ section {
 #nav-header {
   position: absolute; top: 0; left: 0; right: 0;
   display: flex; justify-content: space-between; align-items: flex-start;
-  padding: 28px 36px; z-index: 10; pointer-events: none;
+  padding: clamp(16px,2.5vw,28px) clamp(16px,2.5vw,36px); z-index: 10; pointer-events: none;
 }
-#nav-brand { font-size: clamp(9px,.75vw,12px); letter-spacing: .48em; text-transform: uppercase; color: #E91F9E; opacity: .8; }
+#nav-brand { color: #E91F9E; opacity: .85; display: flex; align-items: center; }
 #nav-count { display: none; }
 #nav-footer {
   position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
@@ -284,9 +300,9 @@ section {
 #intro.hidden { opacity:0; pointer-events:none; }
 #intro-stage { position:absolute; inset:0; }
 #intro-brand {
-  position:absolute; bottom:28px; left:36px;
-  font-size:clamp(9px,.75vw,12px); letter-spacing:.48em; text-transform:uppercase;
-  color:#4A0531; opacity:.4; z-index:10;
+  position:absolute; top:clamp(23px,2.5vw,35px); left:clamp(16px,2.5vw,28px);
+  color:#4A0531; opacity:.85; z-index:10;
+  display:flex; align-items:center;
 }
 
 /* blinking type cursor */
@@ -329,7 +345,7 @@ section {
 
 <div id="intro">
   <div id="intro-stage"></div>
-  <div id="intro-brand">Outpaced</div>
+  <div id="intro-brand" style="color:#4A0531"><svg class="outpaced-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 746.51 174.88" aria-label="Outpaced"><defs><style>.ol1{font-family:AvenirNext-Bold,"Avenir Next",sans-serif;font-size:130.51px;font-weight:700;fill:currentColor}.ol2{letter-spacing:-.06em}.ol3{letter-spacing:-.05em}.ol4{letter-spacing:-.02em}.ol5{letter-spacing:-.03em}.ol6{letter-spacing:0em}.ol7{letter-spacing:0em}</style></defs><text class="ol1" transform="translate(0 111.45)"><tspan class="ol6" x="0" y="0">OUT</tspan><tspan class="ol2" x="281.25" y="0">P</tspan><tspan class="ol4" x="356.29" y="0">A</tspan><tspan class="ol7" x="448.43" y="0">CE</tspan><tspan class="ol3" x="617.18" y="0">D</tspan><tspan class="ol5" x="711.28" y="0">.</tspan></text></svg></div>
 </div>
 
 <section id="opening">
@@ -337,7 +353,7 @@ section {
   <div id="manifesto"></div>
   <div id="phase-label">Stillness</div>
   <div id="phase-controls">Space · Click — R restart</div>
-  <div id="opening-brand">Outpaced</div>
+  <div id="opening-brand" style="color:var(--ink)"><svg class="outpaced-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 746.51 174.88" aria-label="Outpaced"><defs><style>.ol1{font-family:AvenirNext-Bold,"Avenir Next",sans-serif;font-size:130.51px;font-weight:700;fill:currentColor}.ol2{letter-spacing:-.06em}.ol3{letter-spacing:-.05em}.ol4{letter-spacing:-.02em}.ol5{letter-spacing:-.03em}.ol6{letter-spacing:0em}.ol7{letter-spacing:0em}</style></defs><text class="ol1" transform="translate(0 111.45)"><tspan class="ol6" x="0" y="0">OUT</tspan><tspan class="ol2" x="281.25" y="0">P</tspan><tspan class="ol4" x="356.29" y="0">A</tspan><tspan class="ol7" x="448.43" y="0">CE</tspan><tspan class="ol3" x="617.18" y="0">D</tspan><tspan class="ol5" x="711.28" y="0">.</tspan></text></svg></div>
   <div id="opening-slogan">This is how reading feels today.</div>
   <div id="scroll-hint">
     <span id="scroll-hint-question">Can you keep up?</span>
@@ -348,7 +364,7 @@ section {
 <section id="nav-section">
   <canvas id="nav-canvas"></canvas>
   <div id="nav-header">
-    <span id="nav-brand">Outpaced</span>
+    <span id="nav-brand" style="color:#E91F9E"><svg class="outpaced-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 746.51 174.88" aria-label="Outpaced"><defs><style>.ol1{font-family:AvenirNext-Bold,"Avenir Next",sans-serif;font-size:130.51px;font-weight:700;fill:currentColor}.ol2{letter-spacing:-.06em}.ol3{letter-spacing:-.05em}.ol4{letter-spacing:-.02em}.ol5{letter-spacing:-.03em}.ol6{letter-spacing:0em}.ol7{letter-spacing:0em}</style></defs><text class="ol1" transform="translate(0 111.45)"><tspan class="ol6" x="0" y="0">OUT</tspan><tspan class="ol2" x="281.25" y="0">P</tspan><tspan class="ol4" x="356.29" y="0">A</tspan><tspan class="ol7" x="448.43" y="0">CE</tspan><tspan class="ol3" x="617.18" y="0">D</tspan><tspan class="ol5" x="711.28" y="0">.</tspan></text></svg></span>
     <span id="nav-count">4 Experiments</span>
   </div>
   <nav id="experiments">
