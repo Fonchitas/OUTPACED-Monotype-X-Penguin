@@ -725,21 +725,18 @@ new IntersectionObserver((es)=>es.forEach(e=>{ if(e.isIntersecting){ expLinks.fo
     stage.appendChild(wrap);
     an(0,1,500,o4,v=>{wrap.style.opacity=v;});
 
+    // tDiv: the tagline container — display:inline so cursor stays on same line
     const tDiv=document.createElement('div');
     tDiv.style.cssText=`
       font-family:${FONT};font-weight:700;font-synthesis:none;
       font-size:clamp(20px,4vw,54px);
-      letter-spacing:-.03em;line-height:1.2;
+      letter-spacing:-.03em;line-height:1.3;
       color:${INK};text-align:center;
       white-space:normal;overflow-wrap:break-word;
       text-wrap:balance;
       width:100%;
     `;
     wrap.appendChild(tDiv);
-
-    const blink=document.createElement('span');
-    blink.className='type-cursor';
-    tDiv.appendChild(blink);
 
     const sub=document.createElement('div');
     sub.style.cssText=`
@@ -770,26 +767,22 @@ new IntersectionObserver((es)=>es.forEach(e=>{ if(e.isIntersecting){ expLinks.fo
     wrap.appendChild(btn);
 
     const TAGLINE = '\u201cWhat if words stopped waiting for us?\u201d';
-    const textSpan=document.createElement('span');
-    textSpan.textContent='';
-    // blink goes INSIDE textSpan so it always follows the last typed char inline
-    textSpan.appendChild(blink);
-    tDiv.appendChild(textSpan);
 
     let ti=0;
     function typeChar(){
       if(ti<=TAGLINE.length){
-        // set text as a text node before the blink cursor
-        const textNode = textSpan.childNodes[0];
-        if(textNode && textNode.nodeType===3){
-          textNode.textContent=TAGLINE.slice(0,ti);
-        } else {
-          textSpan.insertBefore(document.createTextNode(TAGLINE.slice(0,ti)), blink);
-        }
+        // Rebuild tDiv content: text + inline blinking cursor
+        tDiv.innerHTML = '';
+        const textNode = document.createTextNode(TAGLINE.slice(0,ti));
+        const blink = document.createElement('span');
+        blink.className = 'type-cursor';
+        tDiv.appendChild(textNode);
+        tDiv.appendChild(blink);
         ti++;
         wait(ti<4?110:ti<8?60:36,typeChar);
       } else {
-        rm(blink);
+        // Done typing — remove cursor, leave just the text
+        tDiv.innerHTML = TAGLINE;
         wait(180,()=>{
           sub.style.transform='translateY(8px)';
           sub.style.transition='none';
