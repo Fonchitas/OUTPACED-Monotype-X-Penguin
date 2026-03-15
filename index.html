@@ -728,11 +728,11 @@ new IntersectionObserver((es)=>es.forEach(e=>{ if(e.isIntersecting){ expLinks.fo
     const tDiv=document.createElement('div');
     tDiv.style.cssText=`
       font-family:${FONT};font-weight:700;font-synthesis:none;
-      font-size:clamp(18px,4.5vw,58px);
+      font-size:clamp(24px,5.5vw,58px);
       letter-spacing:-.03em;line-height:1.2;
       color:${INK};text-align:center;
-      white-space:normal;word-break:break-word;
-      width:100%;max-width:600px;
+      white-space:normal;word-break:normal;
+      width:100%;max-width:560px;
     `;
     wrap.appendChild(tDiv);
 
@@ -768,19 +768,27 @@ new IntersectionObserver((es)=>es.forEach(e=>{ if(e.isIntersecting){ expLinks.fo
     `;
     wrap.appendChild(btn);
 
-    const TAGLINE='\u201cWhat if words stopped waiting for us?\u201d';
+    const TAGLINE_LINE1 = '\u201cWhat if words stopped';
+    const TAGLINE_LINE2 = 'waiting for us?\u201d';
     const textSpan=document.createElement('span');
+    textSpan.style.cssText='display:block;';
     textSpan.textContent='';
+    const textSpan2=document.createElement('span');
+    textSpan2.style.cssText='display:block;opacity:0;';
+    textSpan2.textContent=TAGLINE_LINE2;
     tDiv.appendChild(textSpan);
+    tDiv.appendChild(textSpan2);
     tDiv.appendChild(blink);
 
     let ti=0;
     function typeChar(){
-      if(ti<=TAGLINE.length){
-        textSpan.textContent=TAGLINE.slice(0,ti);
+      if(ti<=TAGLINE_LINE1.length){
+        textSpan.textContent=TAGLINE_LINE1.slice(0,ti);
         ti++;
         wait(ti<4?110:ti<8?60:36,typeChar);
-      } else {
+      } else if(ti===TAGLINE_LINE1.length+1){
+        // small pause between lines, then show line2
+        textSpan2.style.opacity='1';
         rm(blink);
         wait(180,()=>{
           sub.style.transform='translateY(8px)';
@@ -798,6 +806,9 @@ new IntersectionObserver((es)=>es.forEach(e=>{ if(e.isIntersecting){ expLinks.fo
             btn.style.transform=`translateY(${10*(1-v)}px)`;
           });
         });
+      } else {
+        ti++;
+        wait(60, typeChar);
       }
     }
     wait(200,typeChar);
@@ -827,9 +838,11 @@ new IntersectionObserver((es)=>es.forEach(e=>{ if(e.isIntersecting){ expLinks.fo
       wrap.style.cssText=`
         position:absolute;left:0;width:100%;
         top:50%;transform:translateY(-50%);
-        display:flex;justify-content:center;align-items:baseline;gap:.28em;
+        display:flex;justify-content:center;align-items:baseline;
+        flex-wrap:wrap;gap:.2em;
+        padding:0 clamp(20px,6vw,60px);box-sizing:border-box;
         font-family:${FONT};font-weight:700;
-        font-size:clamp(36px,6vw,96px);letter-spacing:-.03em;
+        font-size:clamp(28px,8vw,96px);letter-spacing:-.03em;
         color:#340492;
       `;
       stage.appendChild(wrap);
@@ -882,9 +895,10 @@ new IntersectionObserver((es)=>es.forEach(e=>{ if(e.isIntersecting){ expLinks.fo
         position:absolute;left:0;width:100%;
         top:50%;transform:translateY(-50%);
         display:flex;justify-content:center;align-items:baseline;
-        gap:.3em;
+        flex-wrap:wrap;gap:.3em;
+        padding:0 clamp(20px,6vw,60px);box-sizing:border-box;
         font-family:${FONT};font-weight:700;
-        font-size:clamp(36px,6vw,96px);letter-spacing:-.03em;
+        font-size:clamp(28px,8vw,96px);letter-spacing:-.03em;
         color:#FFEC5A;
       `;
       stage.appendChild(wrap);
@@ -941,8 +955,9 @@ new IntersectionObserver((es)=>es.forEach(e=>{ if(e.isIntersecting){ expLinks.fo
         position:absolute;left:0;width:100%;
         top:50%;transform:translateY(-50%);
         font-family:${FONT};font-weight:700;
-        font-size:clamp(36px,6vw,96px);letter-spacing:-.03em;
+        font-size:clamp(28px,8vw,96px);letter-spacing:-.03em;
         color:#9C83FA;text-align:center;
+        padding:0 clamp(20px,6vw,60px);box-sizing:border-box;
         clip-path:inset(0 100% 0 0);
         will-change:clip-path,transform;
       `;
