@@ -772,13 +772,20 @@ new IntersectionObserver((es)=>es.forEach(e=>{ if(e.isIntersecting){ expLinks.fo
     const TAGLINE = '\u201cWhat if words stopped waiting for us?\u201d';
     const textSpan=document.createElement('span');
     textSpan.textContent='';
+    // blink goes INSIDE textSpan so it always follows the last typed char inline
+    textSpan.appendChild(blink);
     tDiv.appendChild(textSpan);
-    tDiv.appendChild(blink);
 
     let ti=0;
     function typeChar(){
       if(ti<=TAGLINE.length){
-        textSpan.textContent=TAGLINE.slice(0,ti);
+        // set text as a text node before the blink cursor
+        const textNode = textSpan.childNodes[0];
+        if(textNode && textNode.nodeType===3){
+          textNode.textContent=TAGLINE.slice(0,ti);
+        } else {
+          textSpan.insertBefore(document.createTextNode(TAGLINE.slice(0,ti)), blink);
+        }
         ti++;
         wait(ti<4?110:ti<8?60:36,typeChar);
       } else {
